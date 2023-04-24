@@ -39,10 +39,16 @@ def receive_long_message(conn):
 
     while bytes_received >= data_length:
         #receive CHUNK
-        bytes_received += 1
+        data = conn.recv(CHUNK)
+        #msg_length = int(msg_length)
+        #data = conn.recv(msg_length) #.decode('utf-8')
+        data_len = len(data)
+
+        #data = conn.recv(CHUNK)
+        bytes_received += data_len
         full_data += data
 
-    return full_data.decode()
+    return full_data.decode('utf-8')
 
 
 def main():
