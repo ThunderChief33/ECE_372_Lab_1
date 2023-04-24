@@ -10,10 +10,11 @@ CHUNK = 100
 def send_intro_message(conn):
     # TODO: Replace {ONID} with your ONID (mine is lyakhovs)
     #       and {MAJOR} with your major (i.e. CS, ECE, any others?)
-    intro_message = "Hello! Welcome to my ({ONID}) server! I'm majoring in {MAJOR}\n"
-
     # TODO: Send this intro message to the client. Don't forget to encode() it!
     #       hint: use the `conn` handle and `sendall`!
+    intro_message = "Hello! Welcome to my ({beann, stephean}) server! I'm majoring in {ECE, CS}\n"
+
+    conn.sendall(intro_message.encode())
 
 
 ##################################
@@ -35,6 +36,11 @@ def receive_long_message(conn):
     #      1. Keep going until `bytes_received` is less than `data_length` (hint: use a loop)
     #      2. Receive a `CHUNK` of data (see `CHUNK` variable above)
     #      3. Update `bytes_received` and `full_data` variables
+
+    while bytes_received >= data_length:
+        #receive CHUNK
+        bytes_received += 1
+        full_data += data
 
     return full_data.decode()
 
@@ -67,6 +73,7 @@ def main():
             message = receive_long_message(conn)
 
             # TODO: print the received `message` to the screen!
+            print(message)
 
 # Run the `main()` function
 if __name__ == "__main__":
